@@ -1,0 +1,5 @@
+train: ../MAFAtoYOLO/train/images.txt
+val: ../MAFAtoYOLO/test/images.txt
+
+nc: 3
+names: ['No mask', 'Mask', 'Mask incorrect']
