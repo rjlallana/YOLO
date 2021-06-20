@@ -3,6 +3,6 @@
 # Dataset: Masked Faces - MAFA (https://imsg.ac.cn/research/maskedface.html)
 
 # Estructura del proyecto
-##   /directorio_padre
-##     /MAFA
-##     /YOLO
+     /directorio_padre
+         /MAFA
+         /YOLO
