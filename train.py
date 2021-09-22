@@ -170,10 +170,10 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
         model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model).to(device)
         logger.info('Using SyncBatchNorm()')
 
-    # EMA
+    # EMA = Exponential Moving Average
     ema = ModelEMA(model) if rank in [-1, 0] else None
 
-    # DDP mode
+    # DDP mode = Distributed Data Parallel
     if cuda and rank != -1:
         model = DDP(model, device_ids=[opt.local_rank], output_device=opt.local_rank)
 
@@ -401,6 +401,7 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
 
                 # Save last, best and delete
                 torch.save(ckpt, last)
+                wandb.save(last) 
                 if best_fitness == fi:
                     torch.save(ckpt, best)
                 if (best_fitness == fi) and (epoch >= 200):
@@ -418,8 +419,6 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
                 if best_fitness_f == fi_f:
                     torch.save(ckpt, wdir / 'best_f.pt')
                 if epoch == 0:
-                    torch.save(ckpt, wdir / 'epoch_{:03d}.pt'.format(epoch))
-                if ((epoch+1) % 25) == 0:
                     torch.save(ckpt, wdir / 'epoch_{:03d}.pt'.format(epoch))
                 if epoch >= (epochs-5):
                     torch.save(ckpt, wdir / 'last_{:03d}.pt'.format(epoch))
@@ -484,6 +483,7 @@ if __name__ == '__main__':
     parser.add_argument('--name', default='exp', help='save to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
     opt = parser.parse_args()
+    print('Print OPT', opt)
 
     # Set DDP variables
     opt.total_batch_size = opt.batch_size
