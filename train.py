@@ -401,7 +401,6 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
 
                 # Save last, best and delete
                 torch.save(ckpt, last)
-                wandb.save(last) 
                 if best_fitness == fi:
                     torch.save(ckpt, best)
                 if (best_fitness == fi) and (epoch >= 200):
