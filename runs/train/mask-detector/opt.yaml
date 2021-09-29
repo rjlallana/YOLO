@@ -1,8 +1,8 @@
-weights: weights/yolov4_csp.pt
-cfg: cfg/yolor_csp.cfg
+weights: weights/last.pt
+cfg: cfg/yolov4_csp.cfg
 data: data/mafa.yaml
 hyp: data/hyp.scratch.640.yaml
-epochs: 5
+epochs: 50
 batch_size: 12
 img_size:
 - 640
