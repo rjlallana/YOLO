@@ -1,4 +1,4 @@
-weights: weights/last.pt
+weights: runs/train/mask-detector/weights/
 cfg: cfg/yolov4_csp.cfg
 data: data/mafa.yaml
 hyp: data/hyp.scratch.640.yaml
