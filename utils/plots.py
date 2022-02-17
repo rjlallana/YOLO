@@ -94,6 +94,9 @@ def output_to_target(output, width, height):
     targets = []
     for i, o in enumerate(output):
         if o is not None:
+            # sometimes output can be a list of tensor, so here ensure the type again, this fixes the error.
+            if isinstance(o, torch.Tensor):
+                o = o.cpu().numpy()
             for pred in o:
                 box = pred[:4]
                 w = (box[2] - box[0]) / width
@@ -160,7 +163,10 @@ def plot_images(images, targets, paths=None, fname='images.jpg', names=None, max
             for j, box in enumerate(boxes.T):
                 cls = int(classes[j])
                 color = colors[cls % len(colors)]
-                cls = names[cls] if names else cls
+                try:
+                  cls = names[cls] if names else cls
+                except IndexError:
+                  pass
                 if labels or conf[j] > 0.25:  # 0.25 conf thresh
                     label = '%s' % cls if labels else '%s %.1f' % (cls, conf[j])
                     plot_one_box(box, mosaic, label=label, color=color, line_thickness=tl)
