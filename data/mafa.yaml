@@ -1,6 +1,6 @@
-train: ../MAFAtoYOLO/train/
-val: ../MAFAtoYOLO/val/
-test: ../MAFAtoYOLO/test/
+train: /content/MAFAtoYOLO/train/
+val: /content/MAFAtoYOLO/valid/
+test: /content/MAFAtoYOLO/test/
 
 nc: 3
-names: ['No mask', 'Mask', 'Mask incorrect']
+names: ['Mask incorrect', 'Mask', 'No mask']
