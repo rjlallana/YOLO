@@ -1,6 +1,10 @@
 .vscode
 weights/*.pt
+
 inference/
 __pycache__/
 PFG.code-workspace
 *.sh
+runs
+test_webcam.py
+test
