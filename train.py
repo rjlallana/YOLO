@@ -501,9 +501,7 @@ if __name__ == '__main__':
         with open(Path(ckpt).parent.parent / 'opt.yaml') as f:
             print(Path(ckpt).parent.parent / 'opt.yaml -> Loaded')
             opt = argparse.Namespace(**yaml.load(f, Loader=yaml.FullLoader))  # replace
-       # opt.cfg, opt.weights, opt.resume = '', ckpt, True
-        opt.weights, opt.resume = ckpt, True
-
+        opt.cfg, opt.weights, opt.resume = '', ckpt, True
         logger.info('Resuming training from %s' % ckpt)
     else:
         # opt.hyp = opt.hyp or ('hyp.finetune.yaml' if opt.weights else 'hyp.scratch.yaml')
